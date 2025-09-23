@@ -1,0 +1,50 @@
+name: 🚀 Deploy React App (with Router) to cPanel
+
+on:
+  push:
+    branches: [main] # Change to your production branch
+
+jobs:
+  deploy:
+    name: 🎉 Deploy React App
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: ⎔ Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Match your React version
+        
+    - name: 📦 Install dependencies
+      run: npm ci # Clean install for consistency
+      
+    - name: 🏗️ Build React app
+      run: npm run build
+      env:
+        CI: false # Prevent build warnings from failing deployment
+        PUBLIC_URL: '.' # Important for React Router in subdirectories
+        
+    - name: 📝 Add .htaccess for React Router
+      run: |
+        echo "Options -MultiViews
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.html [QSA,L]" > ./dist/.htaccess
+        
+    - name: 📂 Deploy to cPanel via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.CPANEL_FTP_HOST }}
+        username: ${{ secrets.CPANEL_FTP_USERNAME }}
+        password: ${{ secrets.CPANEL_FTP_PASSWORD }}
+        local-dir: ./dist/ # Your custom build folder
+        server-dir: ./ # Or subfolder if needed
+        dangerous-clean-slate: true # Cleans remote directory
+        exclude: |
+          **/.DS_Store
+          **/.git*
+          **/*.map
+          **/node_modules/*
