@@ -128,38 +128,6 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
     }
   };
 
-  // Simulate real-time updates (in production, this would be WebSocket or Server-Sent Events)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Check for application status changes (simulated)
-      const shouldUpdate = Math.random() > 0.95; // 5% chance every 30 seconds
-
-      if (shouldUpdate) {
-        const statusUpdates = [
-          {
-            type: 'success' as const,
-            title: 'Application Approved',
-            message: 'Application #12345 has been approved by the admin.',
-          },
-          {
-            type: 'info' as const,
-            title: 'New Application',
-            message: 'A new application has been submitted and requires review.',
-          },
-          {
-            type: 'warning' as const,
-            title: 'System Maintenance',
-            message: 'System maintenance scheduled for tomorrow at 2 AM.',
-          },
-        ];
-
-        const randomUpdate = statusUpdates[Math.floor(Math.random() * statusUpdates.length)];
-        addNotification(randomUpdate);
-      }
-    }, 30000); // Check every 30 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   const value: NotificationContextType = {
     notifications,
