@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS overrides for mobile-friendly, no rounded corners, smaller fonts */
+@layer base {
+  html {
+    font-size: 14px; /* Reduce base font size */
+  }
+
+  @media (max-width: 640px) {
+    html {
+      font-size: 12px; /* Even smaller on mobile */
+    }
+  }
+}
+
+@layer components {
+  /* Override rounded corners globally */
+  .rounded-none { border-radius: 0 !important; }
+  .rounded-lg { border-radius: 0 !important; }
+  .rounded-xl { border-radius: 0 !important; }
+  .rounded-full { border-radius: 0 !important; }
+  .rounded { border-radius: 0 !important; }
+
+  /* Dropdown positioning fix */
+  .dropdown-menu {
+    position: fixed !important;
+    z-index: 9999 !important;
+  }
+}
+
+/* Navy Blue Color Scheme */
+.bg-navy-50 { background-color: #f8fafc; }
+.bg-navy-100 { background-color: #f1f5f9; }
+.bg-navy-200 { background-color: #e2e8f0; }
+.bg-navy-300 { background-color: #cbd5e1; }
+.bg-navy-400 { background-color: #94a3b8; }
+.bg-navy-500 { background-color: #64748b; }
+.bg-navy-600 { background-color: #475569; }
+.bg-navy-700 { background-color: #1e3a8a; }
+.bg-navy-800 { background-color: #1e40af; }
+.bg-navy-900 { background-color: #1e3a8a; }
+
+.text-navy-50 { color: #f8fafc; }
+.text-navy-100 { color: #f1f5f9; }
+.text-navy-200 { color: #e2e8f0; }
+.text-navy-300 { color: #cbd5e1; }
+.text-navy-400 { color: #94a3b8; }
+.text-navy-500 { color: #64748b; }
+.text-navy-600 { color: #475569; }
+.text-navy-700 { color: #1e3a8a; }
+.text-navy-800 { color: #1e40af; }
+.text-navy-900 { color: #1e3a8a; }
+
+.border-navy-500 { border-color: #3b82f6; }
+.border-navy-700 { border-color: #1e3a8a; }
+
+.hover\:bg-navy-800:hover { background-color: #1e40af; }
+.hover\:text-navy-600:hover { color: #2563eb; }
+
+.focus\:ring-navy-500:focus { 
+  --tw-ring-color: #3b82f6; 
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Gradient background */
+.bg-gradient-blue-navy {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #dbeafe 100%);
+}
+
+/* Custom focus styles for inputs */
+.focus\:ring-navy-500:focus {
+  --tw-ring-color: rgba(30, 58, 138, 0.5);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* Toast customization */
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+/* Animation for the button arrow */
+.group:hover .group-hover\:translate-x-1 {
+  transform: translateX(0.25rem);
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
